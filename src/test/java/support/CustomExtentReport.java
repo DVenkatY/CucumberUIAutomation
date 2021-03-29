@@ -34,6 +34,7 @@ public class CustomExtentReport implements ConcurrentEventListener {
         publisher.registerHandlerFor(TestRunFinished.class, this::runFinished);
         publisher.registerHandlerFor(TestSourceRead.class, this::featureRead);
         publisher.registerHandlerFor(TestCaseStarted.class, this::ScenarioStarted);
+        publisher.registerHandlerFor(TestCaseFinished.class, this::ScenarioFinished);
         publisher.registerHandlerFor(TestStepStarted.class, this::stepStarted);
         publisher.registerHandlerFor(TestStepFinished.class, this::stepFinished);
     };
@@ -50,6 +51,7 @@ public class CustomExtentReport implements ConcurrentEventListener {
         spark.config().setTheme(Theme.DARK);
         // Create extent report instance with spark reporter
         extent.attachReporter(spark);
+
     };
     // TestRunFinished event is triggered when all feature file executions are
     // completed
@@ -71,6 +73,7 @@ public class CustomExtentReport implements ConcurrentEventListener {
     private void ScenarioStarted(TestCaseStarted event) {
         String featureName = event.getTestCase().getUri().toString();
         scenario = feature.get(featureName).createNode(event.getTestCase().getName());
+        softAssert=new SoftAssertion();
     };
 
     // step started event
@@ -107,6 +110,10 @@ public class CustomExtentReport implements ConcurrentEventListener {
             step.log(Status.FAIL, result);
         }*/
         System.out.println("step finished");
+    };
+
+    private void ScenarioFinished(TestCaseFinished event) {
+        softAssert.assertAll();
     };
 
 }

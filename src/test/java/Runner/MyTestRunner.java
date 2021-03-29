@@ -9,13 +9,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 import pages.CommonPage;
 import pages.LoginPage;
-import support.CustomExtentReport;
+import support.SoftAssertion;
 import support.Utilities;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +38,8 @@ public class MyTestRunner extends AbstractTestNGCucumberTests {
     public static Map<String, ExtentTest> feature = new HashMap<String, ExtentTest>();
     public static ExtentTest scenario;
     public static ExtentTest step;
+
+    public static SoftAssertion softAssert;
 
     @BeforeSuite
     public void beforeSuite(){

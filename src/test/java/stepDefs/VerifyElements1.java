@@ -1,13 +1,11 @@
 package stepDefs;
 
 import io.cucumber.java8.En;
-import org.testng.asserts.SoftAssert;
 import pages.CommonPage;
-import support.SoftAssertion;
+
+import static Runner.MyTestRunner.softAssert;
 
 public class VerifyElements1 implements En {
-
-    SoftAssertion softAssert=new SoftAssertion();
 
     public VerifyElements1(){
 
